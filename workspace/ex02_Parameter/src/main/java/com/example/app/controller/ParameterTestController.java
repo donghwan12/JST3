@@ -72,9 +72,19 @@ public class ParameterTestController {
 	}
 	
 	@GetMapping("/page1")
-	public void page01(Model model) {
+	public void page01(PersonDto dto,Model model) {
+		log.info("GET/test/page1..."+dto);
 		model.addAttribute("TEST1","test1_value");
-		log.info("GET/test/page1...");
+		model.addAttribute("PersonDto",dto);	
+	}
+	
+	@GetMapping("/page2")
+	public String page2(PersonDto dto,Model model) {
+		log.info("GET/test/page2..."+dto);
+		model.addAttribute("TETS1","page2_value");
+		model.addAttribute("PersonDto",dto);	
+		//받은 파라미터들을 test/page1번에전달
+		return "test/page1";
 	}
 	
 }

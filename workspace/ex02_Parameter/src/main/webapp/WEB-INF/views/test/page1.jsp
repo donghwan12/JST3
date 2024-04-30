@@ -8,7 +8,8 @@
 <h1>
 	PAGE 1 
 </h1>
-
+	TEST1:${TEST1} <br>
+	PAGEDTO:${PersonDto}<br>
 <P>  </P>
 </body>
 </html>
