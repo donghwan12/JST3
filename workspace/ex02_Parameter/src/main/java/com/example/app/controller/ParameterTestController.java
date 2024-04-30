@@ -1,5 +1,7 @@
 package com.example.app.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.app.domain.dto.PersonDto;
 
@@ -86,5 +90,67 @@ public class ParameterTestController {
 		//받은 파라미터들을 test/page1번에전달
 		return "test/page1";
 	}
+	
+	@GetMapping("/page4/{name}/{age}/{addr}")
+	public ModelAndView page4(PersonDto dto) {
+		log.info("GET/test/page4..."+dto);
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.addObject("personDto",dto);
+		modelAndView.setViewName("test/page1");
+		return modelAndView;
+	}
+	
+	//FORWARD
+	@GetMapping("/foward1")
+	public String f1(Model model) {
+		log.info("GET/test/foward1");
+		model.addAttribute("forward1","forward1Value");
+		return "forward:/test/forward2";
+	}
+	@GetMapping("/forward2")
+	public String f2(Model model) {
+		log.info("GET/test/foward3");
+		model.addAttribute("forward2","forward2Value");
+		return "forward:/test/forward3";
+	}
+	@GetMapping("/forward3")
+	public void f3(Model model) {
+		log.info("GET/test/forward3");
+		model.addAttribute("forward3","forward3Value");
+	}
+	
+	//Redirect
+		@GetMapping("/redirect1")
+		public String r1(RedirectAttributes redirectAttributes) {
+			log.info("GET/test/redirect1");
+			redirectAttributes.addAttribute("redirect1","redirect1Value"); //URL의 쿼리스트링으로 전달
+			redirectAttributes.addFlashAttribute("r1","r1Value");
+			return "redirect:/test/redirect2";
+		}
+		@GetMapping("/redirect2")
+		public String r2(String redirect1,RedirectAttributes redirectAttributes) {
+			log.info("GET/test/redirect2"+redirect1);
+			redirectAttributes.addAttribute("redirect1",redirect1);
+			redirectAttributes.addAttribute("redirect2","redirect2Value");
+			
+			redirectAttributes.addFlashAttribute("r2","r2Value");
+			return "redirect:/test/redirect3";
+		}
+		@GetMapping("/redirect3")
+		public String r3(String redirect1,String redirect2,RedirectAttributes redirectAttributes) {
+			log.info("GET/test/redirect3");
+			redirectAttributes.addAttribute("redirect1",redirect1);
+			redirectAttributes.addAttribute("redirect2",redirect2);
+			redirectAttributes.addAttribute("redirect3","redirect3Value");
+			
+			redirectAttributes.addFlashAttribute("r3","r3Value");
+			return "redirect:/test/redirectResult";
+		}
+		@GetMapping("/redirectResult")
+		public void redirectresult(String redirect1,String redirect2,String redirect3,Model model) {
+			model.addAttribute("redirect1",redirect1);	
+			model.addAttribute("redirect2",redirect2);	
+			model.addAttribute("redirect3",redirect3);	
+		}
 	
 }
