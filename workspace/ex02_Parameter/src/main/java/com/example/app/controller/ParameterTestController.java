@@ -1,6 +1,7 @@
 package com.example.app.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -71,7 +72,8 @@ public class ParameterTestController {
 	}
 	
 	@GetMapping("/page1")
-	public void page01() {
+	public void page01(Model model) {
+		model.addAttribute("TEST1","test1_value");
 		log.info("GET/test/page1...");
 	}
 	
