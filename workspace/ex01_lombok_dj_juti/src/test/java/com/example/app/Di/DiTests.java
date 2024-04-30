@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.example.app.domain.dto.PersonComponent;
 import com.example.app.domain.dto.PersonDto;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,8 @@ public class DiTests {
 	private PersonDto person03;
 	@Autowired
 	private PersonDto personDtoBean;
+	@Autowired
+	private PersonComponent personcomponent;
 	
 	@Test
 	public void test() {
@@ -33,6 +36,7 @@ public class DiTests {
 		log.info(personDtoByXml2.toString());
 		log.info( person03.toString());
 		log.info( personDtoBean.toString());
+		log.info(personcomponent.toString());
 		
 	}
 	@Autowired
