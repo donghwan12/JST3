@@ -1,11 +1,14 @@
 package com.example.app.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -124,7 +127,7 @@ public class ParameterTestController {
 		public String r1(RedirectAttributes redirectAttributes) {
 			log.info("GET/test/redirect1");
 			redirectAttributes.addAttribute("redirect1","redirect1Value"); //URL의 쿼리스트링으로 전달
-			redirectAttributes.addFlashAttribute("r1","r1Value");
+			redirectAttributes.addFlashAttribute("r1","r1Value"); 	//세션에 저장
 			return "redirect:/test/redirect2";
 		}
 		@GetMapping("/redirect2")
@@ -152,5 +155,25 @@ public class ParameterTestController {
 			model.addAttribute("redirect2",redirect2);	
 			model.addAttribute("redirect3",redirect3);	
 		}
-	
+		
+		//ServletCode 적용확인
+		@GetMapping("/servlet_test")
+		public void servletTest(HttpServletRequest req,HttpServletResponse resp) {
+			log.info("GET/test/Servlet_TEST");
+			log.info("REQEUST:"+req);
+			log.info("RESPONSE:"+resp);
+			HttpSession session=req.getSession();
+			log.info("SESSION"+session);
+		}
+		
+		@GetMapping("/join")
+		public void join_get() {
+			log.info("GET/test/join...");
+		}
+		//전송버튼을 눌렀을떄 받아주는 post personDto로 바로연결
+		@PostMapping("/join")
+		public void join_post(PersonDto dto) {
+			log.info("post/test/join..."+dto);
+		}
+
 }
