@@ -29,7 +29,7 @@
 					<input name="writer" placeholder="insert writer" class="form-control"	/>			
 				</div>
 				<div  class="m-2 w-50">
-					<div>${regDate} </div>
+					<div>${regdate} </div>
 					<!-- <input  type="datetime-local" name="regdate" placeholder="yyyy-MM-dd hh:mm:ss" class="form-control"	/>	 -->		
 					<input type="datetime-local"  name="regdate" placeholder="yyyy-MM-dd hh:mm:ss" class="form-control"	/>	
 				</div>		
