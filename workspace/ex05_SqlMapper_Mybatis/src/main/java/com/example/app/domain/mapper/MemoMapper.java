@@ -49,4 +49,9 @@ public interface MemoMapper {
 	public memoDto SelectXml(@Param("id") int id);
 	public List<memoDto> SelectAllXml();
 	public List<Map<String,Object> > SelectAllResultMapXml();
+	
+
+//	동적쿼리 적용함수
+	public List<Map<String,Object>> SelectIf(Map<String,Object>map);
+	public List<Map<String,Object>> SelectWhen(Map<String,Object>map);
 }

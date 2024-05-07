@@ -1,7 +1,9 @@
 package com.example.app.mybatis;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -39,12 +41,12 @@ public class MyBatisTests {
 	
 	@Test
 	public void memoMappperTest() {
-//		memoMapper.Insert(new memoDto(123,"texxt"));
-//		memoMapper.Insert(new memoDto(45,"texxt"));
-//		memoMapper.Insert(new memoDto(21,"texxt"));
-//		memoMapper.Insert(new memoDto(87,"texxt"));
-//		memoMapper.Update(new memoDto(123,"hi"));
-//		memoMapper.Delete(123);
+		memoMapper.Insert(new memoDto(123,"texxt"));
+		memoMapper.Insert(new memoDto(45,"texxt"));
+		memoMapper.Insert(new memoDto(21,"texxt"));
+		memoMapper.Insert(new memoDto(87,"texxt"));
+		memoMapper.Update(new memoDto(123,"hi"));
+		memoMapper.Delete(123);
 		
 //		memoDto r1=memoMapper.Select(21);
 //		log.info(r1.toString());
@@ -82,5 +84,33 @@ public class MyBatisTests {
 		memoDto dto=new memoDto(-1,"DADA");
 		memoMapper.Insert(dto);
 		log.info(dto.toString());
+	}
+	
+	@Test
+	public void DynamicQuerys() {
+		//전체 검색
+//		Map<String,Object> param=new HashMap();
+//		param.put("type", "text");
+//		param.put("text", "a");
+//		List<Map<String,Object>> result=memoMapper.SelectIf(param);
+//		
+//		result.forEach(map->{
+//			for(String key:map.keySet()) {
+//				System.out.println("Key :"+key+"val :"+map.get(key));
+//			}
+//		});
+		
+		
+		Map<String,Object> param=new HashMap();
+		param.put("condition", true);
+		param.put("type", "id");
+		param.put("id", "4");
+		List<Map<String,Object>> result=memoMapper.SelectIf(param);
+		
+		result.forEach(map->{
+			for(String key:map.keySet()) {
+				System.out.println("Key : "+key+" val :"+map.get(key));
+			}
+		});
 	}
 }
