@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,5 +30,13 @@ public class MybatisConfig {
 		return sessionFactory.getObject();
 	}
 	
+	@Autowired
+	private SqlSessionFactory sqlSessionFactory;
+	
+	//sql 세션을 bean으로 등록하는 작업
+	@Bean
+	public SqlSessionTemplate sqlSessionTemplate() {
+		return new SqlSessionTemplate(sqlSessionFactory);
+	}
 
 }

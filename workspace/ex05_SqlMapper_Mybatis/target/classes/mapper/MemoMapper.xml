@@ -5,9 +5,9 @@
 
 
 	<insert id="InsertXml" useGeneratedKeys="true" keyProperty="id" parameterType="com.example.app.domain.dto.memoDto">
-		<selectkey keyProperty="id" order="AFTER" resultType="int" >
+		<selectKey keyProperty="id" order="AFTER" resultType="int" >
 			select max(id)+1 from tbl_memo
-		</selectkey>
+		</selectKey>
 		insert into tbl_memo values(null,#{text})	
 	</insert>
 	

@@ -4,17 +4,18 @@ import java.io.FileNotFoundException;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.app.domain.dto.memoDto;
+import com.example.app.domain.service.MemoServiceImpl;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,6 +24,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/memo")
 public class MemoController {
 	
+	@Autowired
+	private MemoServiceImpl memoServiceImpl;
 //	//파일 부재 예외 오류처리
 //	@ExceptionHandler(FileNotFoundException.class)
 //	public String fileNotFoundExceptionHandler(Exception error,Model model) {
@@ -60,6 +63,8 @@ public class MemoController {
 			}
 			
 		}
+		//서비스 실행
+		boolean isAdded=memoServiceImpl.memoRegistration(dto);
 	}
 	@GetMapping("/ex_test1")
 	public void ex_test1() throws FileNotFoundException{
