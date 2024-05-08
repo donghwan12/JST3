@@ -23,7 +23,7 @@ public class RestTestController {
 	
 	
 	@GetMapping("/add_get")
-	public void add_get_Sync(memoDto memodto) {
+	public void add_get_Sync(memoDto memodto) throws Exception {
 		log.info("GEt/add_get...");
 		memoService.memoRegistration(memodto);
 	}

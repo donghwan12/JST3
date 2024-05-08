@@ -20,7 +20,7 @@ public interface MemoMapper {
 
 	@SelectKey(statement="select max(id)+1 from tbl_memo",keyProperty="id",before=false,resultType=int.class)
 	@Insert("insert into tbl_memo values(#{id},#{text})")
-	public int Insert(memoDto memodto);
+	public int Insert(memoDto memodto) throws Exception;
 	
 	@Update("update tbl_memo set text=#{text} where id=#{id}")
 	public int Update(memoDto memodto);

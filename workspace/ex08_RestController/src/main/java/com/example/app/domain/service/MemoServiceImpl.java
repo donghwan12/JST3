@@ -26,18 +26,19 @@ public class MemoServiceImpl {
 	@Autowired
 	private MemoMapper memoMapper;
 	
-	public boolean memoRegistration(memoDto memodto) {
+	public boolean memoRegistration(memoDto memodto) throws Exception {
 		memoMapper.Insert(memodto);
 		return true;
+		
 	}
 	
 	//어떤경우에 트렌젝션을할거냐
 	//오류가 발생했을때
-	@Transactional(rollbackFor =Exception.class)
-	public void addMemoTx(memoDto memodto) {
-		log.info("MemoService addMemoTx() invoke...");
-		memoMapper.Insert(memodto); //Rollback x
-		memodto.setId(memodto.getId()-1);
-		memoMapper.Insert(memodto); //PK중복오류발생
-	}
+//	@Transactional(rollbackFor =Exception.class)
+//	public void addMemoTx(memoDto memodto) {
+//		log.info("MemoService addMemoTx() invoke...");
+//		memoMapper.Insert(memodto); //Rollback x
+//		memodto.setId(memodto.getId()-1);
+//		memoMapper.Insert(memodto); //PK중복오류발생
+//	}
 }

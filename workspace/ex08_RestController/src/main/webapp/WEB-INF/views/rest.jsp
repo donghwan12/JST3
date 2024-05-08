@@ -226,8 +226,15 @@
 			//axios.get 
 			//클라이언트 요청 영역
 			axios
-				.get(projectpath)
-				.then(resp=>{console.log(resp);}) //요청 성공시
+				.get(projectpath+"/memo/add_get?id="+id+"&text="+text)
+				.then(resp=>{
+					console.log(resp);
+					const isAdded=resp.data;
+					if(isAdded===true)
+						alert("비동기 GET MEMO ADD 성공!")
+					else
+						alert("비동기 GET MeMo ADD 실패")
+				}) //요청 성공시
 				.catch(err=>{console.log(err);}) //요청 실패시
 				
 			

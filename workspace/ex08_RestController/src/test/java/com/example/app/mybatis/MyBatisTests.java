@@ -40,7 +40,7 @@ public class MyBatisTests {
 	private MemoMapper memoMapper;
 	
 	@Test
-	public void memoMappperTest() {
+	public void memoMappperTest() throws Exception {
 		memoMapper.Insert(new memoDto(123,"texxt"));
 		memoMapper.Insert(new memoDto(45,"texxt"));
 		memoMapper.Insert(new memoDto(21,"texxt"));
@@ -78,7 +78,7 @@ public class MyBatisTests {
 	}
 	
 	@Test
-	public void SelectkeyTests() {
+	public void SelectkeyTests() throws Exception {
 //		memoMapper.Insert(new memoDto(-1,"haha"));
 		
 		memoDto dto=new memoDto(-1,"DADA");

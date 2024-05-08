@@ -19,10 +19,18 @@ public class MemoRestController {
 	private MemoServiceImpl memoServiceImpl;
 	
 	@GetMapping(value="/add_get")
-	public boolean add_get(memoDto memodto) {
-		log.info("Get/Memo.. "+memodto);
-		boolean isadded=memoServiceImpl.memoRegistration(memodto);
+	public Boolean add_get(memoDto memoDto) {
+		log.info("GET /memo/.." + memoDto);	
+		boolean isadded=false;
+		try {
+			isadded = memoServiceImpl.memoRegistration(memoDto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		log.info("isAdded..."+isadded);
 		return isadded;
 	}
+	
 	
 }

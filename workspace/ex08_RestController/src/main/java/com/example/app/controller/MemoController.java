@@ -52,7 +52,7 @@ public class MemoController {
 	//값을 받는 위치
 	//유효성 체크하기 위한 메서드 valid maven에서 설치해야함
 	@PostMapping(value ="/add")
-	public void add_post(@Valid memoDto dto,BindingResult bindingResult,Model model) {
+	public void add_post(@Valid memoDto dto,BindingResult bindingResult,Model model) throws Exception {
 		log.info("GEt/Memo/add  "+dto);
 		
 		if(bindingResult.hasFieldErrors()) {
@@ -89,7 +89,7 @@ public class MemoController {
 	@PostMapping("/addTx")
 	public void addTx_post(memoDto memodto,Model model) {
 		log.info("Post/memo/addTx..");
-		memoServiceImpl.addMemoTx(memodto);
+//		memoServiceImpl.addMemoTx(memodto);
 	}
 }
 
