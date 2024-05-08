@@ -1,5 +1,7 @@
 package com.example.app.Mybatis;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,23 +32,23 @@ public class MyBatisTest {
 	public void boardTest() {
 		
 //		System.out.println(sqlSession);
-		boardMapper.Insert(new BoardDto(1,"캐슬","느와르","정연","2024"));
-		boardMapper.Insert(new BoardDto(2,"bb","bb","bb","2010"));
-		boardMapper.Insert(new BoardDto(3,"cc","cc","cc","2014"));
-		boardMapper.Insert(new BoardDto(4,"dd","dd","dd","2000"));
-		boardMapper.Insert(new BoardDto(5,"dd","dd","dd","2000"));
-		boardMapper.Insert(new BoardDto(6,"dd","dd","dd","2000"));
-		boardMapper.Insert(new BoardDto(7,"dd","dd","dd","2000"));
+//		boardMapper.Insert(new BoardDto(1,"캐슬","느와르","정연","2024"));
+//		boardMapper.Insert(new BoardDto(2,"bb","bb","bb","2010"));
+//		boardMapper.Insert(new BoardDto(3,"cc","cc","cc","2014"));
+//		boardMapper.Insert(new BoardDto(4,"dd","dd","dd","2000"));
+//		boardMapper.Insert(new BoardDto(5,"dd","dd","dd","2000"));
+//		boardMapper.Insert(new BoardDto(6,"dd","dd","dd","2000"));
+//		boardMapper.Insert(new BoardDto(7,"dd","dd","dd","2000"));
 		
 //		boardMapper.Update(new BoardDto(3,"신의탑","cc","cc","2014"));
 		
 //		BoardDto r1=boardMapper.selectOne(3);
 //		log.info(r1.toString());
 		
-//		List<BoardDto> list=boardMapper.selectAll();
-//		for(BoardDto dto:list) {
-//		log.info(dto.toString());
-//		}
+		List<BoardDto> list=boardMapper.selectAll();
+		for(BoardDto dto:list) {
+		log.info(dto.toString());
+		}
 		
 	}
 }
