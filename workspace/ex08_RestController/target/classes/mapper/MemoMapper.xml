@@ -50,5 +50,26 @@
 		</if>
 	</select>
 	
+	<select id="GetAllMemo"  parameterType="com.example.app.domain.dto.memoDto" resultType="com.example.app.domain.dto.memoDto">
+		select * from tbl_memo
+		
+		<if test='id!=null and id!="" and text!=null and text!=""'>
+			<trim prefix="WHERE" prefixOverrides="AND|OR">
+				 
+						<if test='id!=null and id!=""'>
+							AND id like concat('%',#{id},'%')
+						</if>
+						<if test='text!=null and text!=""'>
+							AND text like concat('%',#{text},'%')
+						</if>	
+				 
+			</trim>			
+		</if>
+
+		
+
+					
+	</select>	
+	
 	
 </mapper>

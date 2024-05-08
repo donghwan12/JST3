@@ -152,7 +152,7 @@
 			</div>	
 			<div class="petch">
 				<h6>[UPDATE]비동기 PETCH 요청</h6>
-				<form method="axiosAsyncPatchForm" action="" onsubmit="return false">
+				<form name="axiosAsyncPatchForm" onsubmit="return false">
 					<input name="id"  placeholder="id" />
 					<input name="text" placeholder="text"  />
 					<button class="axiosAsyncPatchBtn">전송</button>  
@@ -164,6 +164,14 @@
 					<input name="id"  placeholder="id" />
 					<input name="text" placeholder="text"  />
 					<button class="axiosAsyncDeleteBtn">전송</button>  
+				</form>
+			</div>
+			<div class="select">
+				<h6>[select]비동기 select 요청</h6>
+				<form name="axiosAsyncSelectForm"  method="" action="" onsubmit="return false">
+					<input name="id"  placeholder="id" />
+					<input name="text" placeholder="text"  />
+					<button class="axiosAsyncSelectBtn">전송</button>  
 				</form>
 			</div>	
 		</div>
@@ -294,7 +302,38 @@
 			.then(resp=>{console.log(resp);})
 			.catch(err=>{console.log(err);})
 			
-		})		
+		})	
+		//비동기 DELETE MEMO ADD
+		const axiosAsyncDeleteBtn = document.querySelector(".axiosAsyncDeleteBtn");
+		axiosAsyncDeleteBtn.addEventListener('click',function(){
+			const axiosAsyncDeleteForm = document.axiosAsyncDeleteForm;
+			const id = axiosAsyncDeleteForm.id.value;
+			const text = axiosAsyncDeleteForm.text.value;
+			console.log("axiosAsyncDeleteForm clicked..")
+			
+				
+			
+ 			axios.delete(projectpath+"/memo/delete?id="+id)
+			.then(resp=>{console.log(resp);})
+			.catch(err=>{console.log(err);})
+			
+		})	
+		
+		//비동기 SELECT MEMO ADD
+		const axiosAsyncSelectBtn = document.querySelector(".axiosAsyncSelectBtn");
+		axiosAsyncSelectBtn.addEventListener('click',function(){
+			const axiosAsyncSelectForm = document.axiosAsyncSelectForm;
+			const id = axiosAsyncSelectForm.id.value;
+			const text = axiosAsyncSelectForm.text.value;
+			console.log("axiosAsyncSelectForm clicked..")
+			
+				
+			
+ 			axios.get(projectpath+"/memo/all?id="+id+"&text="+text)
+				.then(resp=>{console.log(resp);})
+				.catch(err=>{console.log(err);})
+			
+		})	
 		
 	</script>
 

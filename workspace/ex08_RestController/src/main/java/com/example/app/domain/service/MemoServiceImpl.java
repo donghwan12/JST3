@@ -1,5 +1,7 @@
 package com.example.app.domain.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,6 +49,20 @@ public class MemoServiceImpl {
 	public boolean modifiedMemo(memoDto dto) throws Exception {
 		memoMapper.Update(dto);
 		return true;
+	}
+
+	@Transactional(rollbackFor =Exception.class)
+	public boolean removeMemo(int id) throws Exception {
+		
+		memoMapper.Delete(id);
+		
+		return false;
+	}
+	@Transactional(rollbackFor =Exception.class)
+	public List<memoDto> getAllmemo(memoDto dto) throws Exception{
+		
+		return memoMapper.GetAllMemo(dto);
+		
 	}
 	
 	

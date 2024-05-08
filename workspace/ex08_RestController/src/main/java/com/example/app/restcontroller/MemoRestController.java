@@ -1,8 +1,11 @@
 package com.example.app.restcontroller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -98,5 +101,32 @@ public class MemoRestController {
 		return new ResponseEntity("PatchFail",HttpStatus.BAD_GATEWAY);
 	}
 	
+	@DeleteMapping(value="/delete")
+	public ResponseEntity<String> delete(int id){
+		log.info("DELETE/memo/delete.."+id);
+		
+		boolean isDel=false;
+		try {
+			isDel=memoServiceImpl.removeMemo(id);
+			if(isDel) {
+				return new ResponseEntity("DeleteSuccess",HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ResponseEntity("DeleteFailed",HttpStatus.BAD_GATEWAY);
+				
+	}
+	@GetMapping("/all")
+	public ResponseEntity<List<memoDto>> getAllMemo(memoDto dto) throws Exception {
+		log.info("GET/memo/all..."+dto);
+		
+			List<memoDto>list =memoServiceImpl.getAllmemo(dto);
+		return new ResponseEntity(list,HttpStatus.OK);
+	}
 	
 }
+	
+	
+	

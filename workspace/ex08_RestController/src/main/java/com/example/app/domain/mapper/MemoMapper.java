@@ -26,7 +26,7 @@ public interface MemoMapper {
 	public int Update(memoDto memodto)throws Exception;
 	
 	@Delete("delete from tbl_memo where id=#{id}")
-	public int Delete(int id);
+	public int Delete(int id)throws Exception;
 	
 	@Select("select * from tbl_memo where id=#{id}")
 	public memoDto Select(@Param("id") int id);
@@ -54,4 +54,7 @@ public interface MemoMapper {
 //	동적쿼리 적용함수
 	public List<Map<String,Object>> SelectIf(Map<String,Object>map);
 	public List<Map<String,Object>> SelectWhen(Map<String,Object>map);
+	
+	//GetAllMemo
+	public List<memoDto> GetAllMemo(memoDto dto);
 }
