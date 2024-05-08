@@ -23,7 +23,7 @@ public interface MemoMapper {
 	public int Insert(memoDto memodto) throws Exception;
 	
 	@Update("update tbl_memo set text=#{text} where id=#{id}")
-	public int Update(memoDto memodto);
+	public int Update(memoDto memodto)throws Exception;
 	
 	@Delete("delete from tbl_memo where id=#{id}")
 	public int Delete(int id);

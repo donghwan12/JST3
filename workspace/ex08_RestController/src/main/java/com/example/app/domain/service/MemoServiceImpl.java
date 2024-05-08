@@ -34,11 +34,20 @@ public class MemoServiceImpl {
 	
 	//어떤경우에 트렌젝션을할거냐
 	//오류가 발생했을때
-//	@Transactional(rollbackFor =Exception.class)
-//	public void addMemoTx(memoDto memodto) {
-//		log.info("MemoService addMemoTx() invoke...");
-//		memoMapper.Insert(memodto); //Rollback x
-//		memodto.setId(memodto.getId()-1);
-//		memoMapper.Insert(memodto); //PK중복오류발생
-//	}
+	@Transactional(rollbackFor =Exception.class)
+	public void addMemoTx(memoDto memodto) throws Exception {
+		log.info("MemoService addMemoTx() invoke...");
+		memoMapper.Insert(memodto); //Rollback x
+		memodto.setId(memodto.getId()-1);
+		memoMapper.Insert(memodto); //PK중복오류발생
+	}
+	
+	
+	@Transactional(rollbackFor =Exception.class)
+	public boolean modifiedMemo(memoDto dto) throws Exception {
+		memoMapper.Update(dto);
+		return true;
+	}
+	
+	
 }

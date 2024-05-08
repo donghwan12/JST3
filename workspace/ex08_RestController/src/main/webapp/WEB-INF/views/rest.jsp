@@ -152,10 +152,10 @@
 			</div>	
 			<div class="petch">
 				<h6>[UPDATE]비동기 PETCH 요청</h6>
-				<form method="" action="" onsubmit="return false">
+				<form method="axiosAsyncPatchForm" action="" onsubmit="return false">
 					<input name="id"  placeholder="id" />
 					<input name="text" placeholder="text"  />
-					<button>전송</button>  
+					<button class="axiosAsyncPatchBtn">전송</button>  
 				</form>
 			</div>				
 			<div class="delete">
@@ -240,8 +240,64 @@
 			
 			
 		});
+		
+		//비동기 POST MEMO ADD
+		const axiosAsyncPostBtn=document.querySelector(".axiosAsyncPostBtn");
+		axiosAsyncPostBtn.addEventListener("click",function(){
+			
+			const axiosAsyncPostForm=document.axiosAsyncPostForm;
+			const id=axiosAsyncPostForm.id.value;
+			const text=axiosAsyncPostForm.text.value;
+			
+			
+			const header={"Content-Type":"application/json"}
+			
+			const params={"id":id,"text":text}
+			
+			axios.post(projectpath+"/memo/add_post",params,header)
+				.then(resp=>{console.log(resp);})
+				.catch(err=>{console.log(err);})
+			
+			
+		})
+		
+		//비동기 PUT MEMO ADD
+		const axiosAsyncPutBtn = document.querySelector(".axiosAsyncPutBtn");
+		axiosAsyncPutBtn.addEventListener('click',function(){
+			const axiosAsyncPutForm = document.axiosAsyncPutForm;
+			const id = axiosAsyncPutForm.id.value;
+			const text = axiosAsyncPutForm.text.value;
+			console.log("axiosAsyncPutBtn clicked..")
+			
+			const header={"Content-Type":"application/json"}
+			
+			const params={"id":id,"text":text}	
+			
+ 			axios.put(projectpath+"/memo/put",params,header)
+			.then(resp=>{console.log(resp);})
+			.catch(err=>{console.log(err);})
+			
+		})
+		//비동기 PATCH MEMO ADD
+		const axiosAsyncPatchBtn = document.querySelector(".axiosAsyncPatchBtn");
+		axiosAsyncPatchBtn.addEventListener('click',function(){
+			const axiosAsyncPatchForm = document.axiosAsyncPatchForm;
+			const id = axiosAsyncPatchForm.id.value;
+			const text = axiosAsyncPatchForm.text.value;
+			console.log("axiosAsyncPatchBtn clicked..")
+			
+			const header={"Content-Type":"application/json"}
+			
+			const params={"id":id,"text":text}		
+			
+ 			axios.patch(projectpath+"/memo/patch",params,header)
+			.then(resp=>{console.log(resp);})
+			.catch(err=>{console.log(err);})
+			
+		})		
+		
 	</script>
-	
+
 	
 	
 		
