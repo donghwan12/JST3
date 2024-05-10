@@ -17,8 +17,8 @@ public class SimpleServiceImpl {
 		log.info("simpleServiceImpl get2...");
 		
 	}
-	public void get3() {
+	public int get3() {
 		log.info("simpleServiceImpl get3...");
-		
+		return 102;
 	}
 }
