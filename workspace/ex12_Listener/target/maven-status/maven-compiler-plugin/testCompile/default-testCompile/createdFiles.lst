@@ -1,0 +1,4 @@
+com\example\app\Di\DiTests.class
+com\example\app\lombok\lombokTest.class
+com\example\app\controller\controllerTests.class
+com\example\app\config\PersonDtoBeanConfig.class
