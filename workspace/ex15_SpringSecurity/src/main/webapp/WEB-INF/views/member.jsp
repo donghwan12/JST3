@@ -13,5 +13,6 @@
 	
 	<h1>Member Page</h1>
 	
+	${authentification}
 </body>
 </html>

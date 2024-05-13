@@ -13,5 +13,13 @@
 	
 	<h1>User Page</h1>
 	
+	
+	${authentication}
+	<hr>
+	${name }
+	<hr>
+	${pricipal}
+	<hr>
+	${isAuthenticated} 
 </body>
 </html>
