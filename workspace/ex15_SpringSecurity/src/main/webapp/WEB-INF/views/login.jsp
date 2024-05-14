@@ -15,11 +15,12 @@
 	<form action="${pageContext.request.contextPath}/login" method="post">
 		<input name="username"><br>
 		<input name="password"><br>
+		<input type="checkbox" name="remember-me"/>로그인 상태를 유지(Remember Me) <br>
 		<button>로그인</button>
 		
 		<!--CSRF TOKEN전달  -->
 	<%-- <input type="hidden" name="_csrf" values="${_csrf.token }"/> --%>
 	</form>
-	
+	 MSG:${msg}<br>
 </body>
 </html>

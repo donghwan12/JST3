@@ -1,5 +1,7 @@
 package com.example.app.config;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,9 +11,16 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import com.example.app.config.auth.PrincipalDetailsService;
+import com.example.app.config.auth.LoginHandler.CustomAuthenticationFailureHandler;
 import com.example.app.config.auth.LoginHandler.CustomLoginSuccessHandler;
+import com.example.app.config.auth.exception.CustomAccessDeniedHandler;
+import com.example.app.config.auth.exception.CustomAuthenticationEntryPoint;
+import com.example.app.config.auth.logoutHandler.CustomLogoutHandler;
+import com.example.app.config.auth.logoutHandler.CustomLogoutSurccesccHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -27,7 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+	@Autowired
+	private DataSource dataSource3;
 	//웹요청 처리
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -48,12 +58,39 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.formLogin()
 			.loginPage("/login")
 			.permitAll()
-			.successHandler(new CustomLoginSuccessHandler());
+			.successHandler(new CustomLoginSuccessHandler())
+			.failureHandler(new CustomAuthenticationFailureHandler());
+			
 		//로그아웃
 		http.logout()
 			.logoutUrl("/logout")
-			.permitAll();
+			.permitAll()
+			.addLogoutHandler(new CustomLogoutHandler())
+			.logoutSuccessHandler(new CustomLogoutSurccesccHandler());
+//			.logoutSuccessUrl("/login");
+			
+//		예외처리
+		http.exceptionHandling()
+			.accessDeniedHandler(new CustomAccessDeniedHandler()) //권한없는 페이지에 접근할경우 처리하는 페이지
+			.authenticationEntryPoint(new CustomAuthenticationEntryPoint()); //미인증 사용자를 처리
 		
+//		REMEMBER_ME
+		http.rememberMe()
+			.key("rememberMeKey")
+			.rememberMeParameter("remember-me")
+			.alwaysRemember(false)
+			.tokenValiditySeconds(60*60)
+			.tokenRepository(tokenRepository());//토큰 레파시토리 등록을한것
+			
+		
+	}
+
+	@Bean
+	//토큰을 bean에 저장하는용도?
+	public PersistentTokenRepository tokenRepository() {
+		JdbcTokenRepositoryImpl repo=new JdbcTokenRepositoryImpl();
+		repo.setDataSource(dataSource3);
+		return repo;
 	}
 
 	@Override

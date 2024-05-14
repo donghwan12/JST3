@@ -67,8 +67,8 @@ public class UserController {
 	
 	
 	@GetMapping("/login")
-	public void login() {
-		log.info("GET /login");
+	public void login(Exception exception) {
+		log.info("GET /login..."+exception );
 	}
 	
 	
